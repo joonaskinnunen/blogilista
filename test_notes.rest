@@ -1,1 +1,9 @@
-get http://localhost:3003/api/blogs/
+get http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "title": "jaadajaada",
+  "author": "Roope setä",
+  "url": "http://osoisofs.net",
+  "likes": 2
+}
