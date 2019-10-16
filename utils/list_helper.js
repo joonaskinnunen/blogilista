@@ -1,5 +1,3 @@
-const _ = require('lodash');
-
 const dummy = (blogs) => {
     return 1
 }
@@ -38,9 +36,27 @@ const mostBlogs = (blogs) => {
     return result
 }
 
+const mostLikedAuthor = (blogs) => {
+    let numberOfLikes = []
+
+    for (let i = 0; i < blogs.length; i++) {
+        if (numberOfLikes.some(e => e.author === blogs[i].author)) {
+            numberOfLikes.map((x, j) => x.author === blogs[i].author ? numberOfLikes[j].likes = numberOfLikes[j].likes + blogs[i].likes : void 0)
+        } else {
+            numberOfLikes.push({ "author": blogs[i].author, "likes": blogs[i].likes })
+        }
+    }
+
+    let result = numberOfLikes[0]
+    numberOfLikes.map(x => x.likes > result.likes ? result = x : void 0)
+    console.log(result)
+    return result
+}
+
 module.exports = {
     dummy,
     totalLikes,
     mostLikes,
-    mostBlogs
+    mostBlogs,
+    mostLikedAuthor
 }
