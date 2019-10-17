@@ -41,6 +41,18 @@ test('return right amount of blogs', async () => {
     const response = await api.get('/api/blogs')
     expect(response.body.length).toBe(2)
 })
+test('return right amount of blogs when added one blog', async () => {
+    blogObject = new Blog(initialBlogs[2])
+    await blogObject.save()
+    const response = await api.get('/api/blogs')
+    expect(response.body.length).toBe(3)
+})
+test('notes are returned as json', async () => {
+    await api
+        .get('/api/blogs')
+        .expect(200)
+        .expect('Content-Type', /application\/json/)
+})
 
 afterAll(() => {
     mongoose.connection.close()
