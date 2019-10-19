@@ -16,14 +16,6 @@ const initialBlogs = [
         author: "Robert C. Martin",
         url: "http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html",
         likes: 2
-    },
-    {
-        _id: "5a422b891b54a676234d17fa",
-        title: "First class tests",
-        author: "Robert C. Martin",
-        url: "http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll",
-        likes: 10,
-        __v: 0
     }
 ]
 
@@ -36,24 +28,41 @@ beforeEach(async () => {
     blogObject = new Blog(initialBlogs[1])
     await blogObject.save()
 })
+describe('database GET', () => {
+    test('return right amount of blogs', async () => {
+        const response = await api.get('/api/blogs')
+        expect(response.body.length).toBe(2)
+    })
+    test('return right amount of blogs when added one blog', async () => {
+        blogObject = new Blog(initialBlogs[1])
+        await blogObject.save()
+        const response = await api.get('/api/blogs')
+        expect(response.body.length).toBe(3)
+    })
+    test('notes are returned as json', async () => {
+        await api
+            .get('/api/blogs')
+            .expect(200)
+            .expect('Content-Type', /application\/json/)
+    })
+    test('blog has id', async () => {
+        const response = await api.get('/api/blogs')
+        response.body.map(blog => expect(blog.id).toBeDefined())
+    })
+})
 
-test('return right amount of blogs', async () => {
-    const response = await api.get('/api/blogs')
-    expect(response.body.length).toBe(2)
-})
-test('return right amount of blogs when added one blog', async () => {
-    blogObject = new Blog(initialBlogs[2])
-    await blogObject.save()
-    const response = await api.get('/api/blogs')
-    expect(response.body.length).toBe(3)
-})
-test('notes are returned as json', async () => {
-    await api
-        .get('/api/blogs')
-        .expect(200)
-        .expect('Content-Type', /application\/json/)
-})
+describe('database POST', () => {
+    test('adding new blog works', async () => {
+        await api
+            .post('/api/blogs')
+            .send(initialBlogs[0])
+            .expect(201)
+            .expect('Content-Type', /application\/json/)
 
+        const response = await api.get('/api/blogs')
+        expect(response.body.length).toBe(initialBlogs.length + 1)
+    })
+})
 afterAll(() => {
     mongoose.connection.close()
 })
