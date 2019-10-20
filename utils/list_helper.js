@@ -49,7 +49,6 @@ const mostLikedAuthor = (blogs) => {
 
     let result = numberOfLikes[0]
     numberOfLikes.map(x => x.likes > result.likes ? result = x : void 0)
-    console.log(result)
     return result
 }
 

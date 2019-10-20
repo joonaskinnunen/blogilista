@@ -19,6 +19,28 @@ const initialBlogs = [
     }
 ]
 
+const blogWithoutLikes = [
+    {
+        title: "Blog that no one likes",
+        author: "Robert C. Martin",
+        url: "http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html"
+    }
+]
+const blogWithoutTitle = [
+    {
+        author: "Robert C. Martin",
+        url: "http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html",
+        likes: 2
+    }
+]
+const blogWithoutUrl = [
+    {
+        author: "Robert C. Martin",
+        title: "Type wars",
+        likes: 2
+    }
+]
+
 beforeEach(async () => {
     await Blog.deleteMany({})
 
@@ -56,11 +78,29 @@ describe('database POST', () => {
         await api
             .post('/api/blogs')
             .send(initialBlogs[0])
-            .expect(201)
+            .expect(200)
             .expect('Content-Type', /application\/json/)
 
         const response = await api.get('/api/blogs')
         expect(response.body.length).toBe(initialBlogs.length + 1)
+    })
+    test('when likes is missing, set likes to 0', async () => {
+        const newBlog = new Blog(blogWithoutLikes)
+        const savedBlog = await newBlog.save()
+        console.log(savedBlog)
+        expect(savedBlog.likes).toBe(0)
+    })
+    test('400 Bad request when title is missing', async () => {
+        await api
+            .post('/api/blogs')
+            .send(blogWithoutTitle)
+            .expect(400)
+    })
+    test('400 Bad request when url is missing', async () => {
+        await api
+            .post('/api/blogs')
+            .send(blogWithoutUrl)
+            .expect(400)
     })
 })
 afterAll(() => {
