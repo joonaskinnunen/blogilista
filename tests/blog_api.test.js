@@ -103,6 +103,13 @@ describe('database POST', () => {
             .expect(400)
     })
 })
+describe('database DELETE', () => {
+    test('delete by id returns 204', async () => {
+        await api
+            .delete('/api/blogs/5dacbe4fdec330f69b36f2ae')
+            .expect(204)
+    })
+})
 afterAll(() => {
     mongoose.connection.close()
 })

@@ -1,9 +1,9 @@
-post http://localhost:3003/api/blogs
+delete http://localhost:3003/api/blogs/5dacbd751e74dcf67eeec570
 Content-Type: application/json
 
 {
-  "title": "juujuu",
+  "title": "joku vaan",
   "author": "Random",
   "url": "http://osoisofs.net",
-  "likes":
+  "likes": 2
 }

@@ -8,6 +8,7 @@ const mongoose = require('mongoose')
 const blogsRouter = require('./controllers/blogs')
 
 const mongoUrl = config.MONGODB_URI
+mongoose.set('useFindAndModify', false)
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
     .catch((error) => {
         console.log('error connecting to MongoDB:', error.message)
