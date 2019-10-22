@@ -42,11 +42,12 @@ blogsRouter.put('/:id', async (req, res, next) => {
 
 blogsRouter.post('/', async (request, response, next) => {
     const body = request.body
+
     let blog = new Blog({
         "title": body.title,
         "author": body.author,
         "url": body.url,
-        "likes": body.likes === undefined || !body.likes ? 0 : body.likes
+        "likes": body.likes
     })
     try {
         if (!blog.title || !blog.url) {
