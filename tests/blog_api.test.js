@@ -3,6 +3,13 @@ const app = require('../app')
 const api = supertest(app)
 const mongoose = require('mongoose')
 const Blog = require('../models/blog')
+const User = require('../models/user')
+
+const newUser = {
+    name: "Joonas",
+    username: "joonaski",
+    password: "ureirui"
+}
 
 const initialBlogs = [
     {
@@ -10,35 +17,40 @@ const initialBlogs = [
         author: "Robert C. Martin",
         url: "http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html",
         likes: 0,
-    },
+        userId: "5daf3285da626112edf21acd"
+        },
     {
         title: "Type wars",
         author: "Robert C. Martin",
         url: "http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html",
-        likes: 2
-    }
+        likes: 2,
+        userId: "5daf3285da626112edf21acd"
+        }
 ]
 
 const blogWithoutLikes = [
     {
         title: "Blog that no one likes",
         author: "Robert C. Martin",
-        url: "http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html"
-    }
+        url: "http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html",
+        userId: "5daf3285da626112edf21acd"
+        }
 ]
 const blogWithoutTitle = [
     {
         author: "Robert C. Martin",
         url: "http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html",
-        likes: 2
-    }
+        likes: 2,
+        userId: "5daf3285da626112edf21acd"
+        }
 ]
 const blogWithoutUrl = [
     {
         author: "Robert C. Martin",
         title: "Type wars",
-        likes: 2
-    }
+        likes: 2,
+        userId: "5daf3285da626112edf21acd"
+        }
 ]
 
 beforeEach(async () => {
@@ -49,7 +61,13 @@ beforeEach(async () => {
 
     blogObject = new Blog(initialBlogs[1])
     await blogObject.save()
+
+    await User.deleteMany({})
+
+    let userObject = new User(newUser)
+    await userObject.save()
 })
+
 describe('database GET', () => {
     test('return right amount of blogs', async () => {
         const response = await api.get('/api/blogs')
@@ -75,8 +93,9 @@ describe('database GET', () => {
 
 describe('database POST', () => {
     test('adding new blog works', async () => {
+        console.log(initialBlogs[0])
         await api
-            .post('/api/blogs')
+            .post('/api/blogs/')
             .send(initialBlogs[0])
             .expect(200)
             .expect('Content-Type', /application\/json/)
@@ -87,7 +106,6 @@ describe('database POST', () => {
     test('when likes is missing, set likes to 0', async () => {
         const newBlog = new Blog(blogWithoutLikes)
         const savedBlog = await newBlog.save()
-        console.log(savedBlog)
         expect(savedBlog.likes).toBe(0)
     })
     test('400 Bad request when title is missing', async () => {

@@ -2,8 +2,9 @@ post http://localhost:3003/api/blogs/
 Content-Type: application/json
 
 {
-  "title": "otsikko",
-  "author": "Random",
-  "url": "http://osoisofs.net",
-  "likes": 22
-}
+  "title": "joku blogi joo",
+  "author": "Robert C. Martin",
+  "url": "http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html",
+  "likes": 0,
+  "userId": "5db09865d9925f21747da645"
+      }
