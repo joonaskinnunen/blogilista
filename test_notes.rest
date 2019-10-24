@@ -1,10 +1,10 @@
 post http://localhost:3003/api/blogs/
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InV1c2lrYXl0dGFqYSIsImlkIjoiNWRiMWQ1Y2ViZmNiYzUzMTZmYmJjNzI2IiwiaWF0IjoxNTcxOTM1NzAyfQ.MEXeH2i6M9-iCBXHCpvIf916qaGIeTShylVzIfWGEhk
 
 {
-  "title": "joku blogi joo",
+  "title": "Blog",
   "author": "Robert C. Martin",
   "url": "http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html",
-  "likes": 0,
-  "userId": "5db09865d9925f21747da645"
+  "likes": 0
       }
