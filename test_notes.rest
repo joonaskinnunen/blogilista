@@ -1,9 +1,9 @@
-post http://localhost:3003/api/blogs/
+delete http://localhost:3003/api/blogs/5db737d7182b6b5ef5e3762f
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InV1c2lrYXl0dGFqYSIsImlkIjoiNWRiMWQ1Y2ViZmNiYzUzMTZmYmJjNzI2IiwiaWF0IjoxNTcxOTM1NzAyfQ.MEXeH2i6M9-iCBXHCpvIf916qaGIeTShylVzIfWGEhk
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InV1c2lrYXl0dGFqYTIiLCJpZCI6IjVkYjcyZTRmZGRjZjFmNWQ4MWJjOWNjMSIsImlhdCI6MTU3MjI4ODQyOH0.BxuIZQ3nunus_W5mIC4ZHYPfPyuGlMSCVMJtnsN6_xg
 
 {
-  "title": "Blog",
+  "title": "Poistettava blogi2",
   "author": "Robert C. Martin",
   "url": "http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html",
   "likes": 0
