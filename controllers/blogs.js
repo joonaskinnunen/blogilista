@@ -9,7 +9,7 @@ blogsRouter.get('/', async (request, response, next) => {
             .find({}).populate("user", { username: 1, name: 1 })
         response.json(blogs.map(note => note.toJSON()))
     } catch (exception) {
-        next(expection)
+        next(exception)
     }
 })
 
