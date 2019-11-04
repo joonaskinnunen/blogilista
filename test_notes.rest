@@ -1,10 +1,10 @@
-delete http://localhost:3003/api/blogs/5db738f7e9b2e35f4d89414c
+post http://localhost:3003/api/blogs/
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InV1c2lrYXl0dGFqYTMiLCJpZCI6IjVkYjczOGFiZTliMmUzNWY0ZDg5NDE0YiIsImlhdCI6MTU3MjI4ODY5MX0.EvF15qQ8Cnk1qzVlzNCzHv930fFVrJ2bbiBeZdzztHQ
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNlcHBvc2VpbmFodWxsdSIsImlkIjoiNWRjMDkwYjBhYmI0NDEzOTNhNWU0NDE0IiwiaWF0IjoxNTcyOTAxMDU2fQ.Cvp64CPVnVKoL8yaDzMAvbn6NEN5ikONPpC0LPPhZtQ
 
 {
-  "title": "Poistettava blogi3",
-  "author": "Robert C. Martin",
-  "url": "http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html",
-  "likes": 0
+"author": "Dexter Morgan",
+"likes": 55,
+"title": "Dexter",
+"url": "http://netflix.com"
       }

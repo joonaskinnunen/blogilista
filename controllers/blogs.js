@@ -38,12 +38,14 @@ blogsRouter.delete('/:id', async (req, res, next) => {
 
 blogsRouter.put('/:id', async (req, res, next) => {
     const body = req.body
+    console.log(req.params.id)
 
     const blog = {
         "title": body.title,
         "author": body.author,
         "url": body.url,
-        "likes": body.likes || 0
+        "likes": body.likes || 0,
+        "user": body.user.id
 
     }
     try {
